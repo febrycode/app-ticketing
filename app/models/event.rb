@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   # Association
-  has_one :location
+  belongs_to :location
   has_one :schedule
   has_many :ticket_types
 end

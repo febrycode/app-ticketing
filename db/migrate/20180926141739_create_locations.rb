@@ -1,7 +1,6 @@
 class CreateLocations < ActiveRecord::Migration[5.2]
   def change
     create_table :locations do |t|
-      t.references :event, foreign_key: true
       t.text :address, null: false
       t.string :city, null: false
       t.string :state, null: false
