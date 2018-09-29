@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def create
     event = Event.new(event_params)
+    event.build_schedule(schedule_params)
 
     if event.save
       render json: { message: 'Data has been created successfully' }, status: :created
@@ -15,6 +16,13 @@ class EventsController < ApplicationController
     params.permit(
       :name,
       :location_id
+    )
+  end
+
+  def schedule_params
+    params.permit(
+      :start,
+      :end
     )
   end
 end
