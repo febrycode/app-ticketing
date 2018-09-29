@@ -1,4 +1,10 @@
 class EventsController < ApplicationController
+  def index
+    events = Event.all
+
+    render 'index', locals: { events: events }
+  end
+
   def create
     event = Event.new(event_params)
     event.build_schedule(schedule_params)
@@ -21,8 +27,8 @@ class EventsController < ApplicationController
 
   def schedule_params
     params.permit(
-      :start,
-      :end
+      :start_time,
+      :end_time
     )
   end
 end
