@@ -1,4 +1,4 @@
 class Schedule < ApplicationRecord
   # Association
-  belongs_to :event
+  has_many :event
 end
