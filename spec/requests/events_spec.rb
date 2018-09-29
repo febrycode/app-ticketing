@@ -5,7 +5,12 @@ RSpec.describe 'Events API', type: :request do
 
     context 'when valid attributes' do
       let!(:location) { create(:location) }
-      let(:valid_attributes) { { name: 'Sample Event', location_id: location.id } }
+      let(:valid_attributes) {{
+        name: 'Sample Event',
+        start: '2018-10-28 10:30:00',
+        end: '2018-10-29 10:30:00',
+        location_id: location.id
+      }}
 
       before { post '/event/create', params: valid_attributes }
 
