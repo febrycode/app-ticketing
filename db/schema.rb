@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_011706) do
+ActiveRecord::Schema.define(version: 2018_09_29_054050) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "location_id"
+    t.bigint "schedule_id"
     t.index ["location_id"], name: "index_events_on_location_id"
+    t.index ["schedule_id"], name: "index_events_on_schedule_id"
   end
 
   create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -32,12 +34,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_011706) do
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "event_id"
-    t.datetime "start", null: false
-    t.datetime "end", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_schedules_on_event_id"
   end
 
   create_table "ticket_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -51,6 +51,6 @@ ActiveRecord::Schema.define(version: 2018_09_28_011706) do
   end
 
   add_foreign_key "events", "locations"
-  add_foreign_key "schedules", "events"
+  add_foreign_key "events", "schedules"
   add_foreign_key "ticket_types", "events"
 end
