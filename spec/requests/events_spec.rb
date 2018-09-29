@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Events API', type: :request do
+  describe 'GET /event/get_info' do
+    let!(:events) { create_list(:event, 5) }
+
+    before { get '/event/get_info', headers: { 'Accept': 'application/json' } }
+    
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns data event' do
+      expect(json['events'].length).to eql(5)
+    end
+  end
+
   describe 'POST /event/create' do
 
     context 'when valid attributes' do
