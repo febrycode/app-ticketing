@@ -7,8 +7,8 @@ RSpec.describe 'Events API', type: :request do
       let!(:location) { create(:location) }
       let(:valid_attributes) {{
         name: 'Sample Event',
-        start: '2018-10-28 10:30:00',
-        end: '2018-10-29 10:30:00',
+        start_time: '2018-10-28 10:30:00',
+        end_time: '2018-10-29 10:30:00',
         location_id: location.id
       }}
 
