@@ -6,9 +6,7 @@ RSpec.describe 'Ticket Type API', type: :request do
     let(:headers) { { 'Accept': 'application/json' } }
 
     context 'with valid attributes' do
-      let!(:location) { create(:location) }
-      let!(:schedule) { create(:schedule) }
-      let!(:event) { create(:event, location_id: location.id, schedule_id: schedule.id) }
+      let!(:event) { create(:event) }
 
       let(:valid_attributes) { {
         event_id: event.id,
