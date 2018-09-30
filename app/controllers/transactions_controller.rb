@@ -1,4 +1,10 @@
 class TransactionsController < ApplicationController
+  def index
+    transactions = Transaction.all
+
+    render 'index', locals: { transactions: transactions }
+  end
+  
   def create
     transaction_service = TransactionCreationService.new(params).call
 
