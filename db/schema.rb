@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_054050) do
+ActiveRecord::Schema.define(version: 2018_09_29_064353) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -50,7 +50,31 @@ ActiveRecord::Schema.define(version: 2018_09_29_054050) do
     t.index ["event_id"], name: "index_ticket_types_on_event_id"
   end
 
+  create_table "transaction_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "transaction_id", null: false
+    t.bigint "ticket_type_id", null: false
+    t.integer "qty", default: 0, null: false
+    t.decimal "price_n_qty", precision: 19, scale: 4, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_type_id"], name: "index_transaction_details_on_ticket_type_id"
+    t.index ["transaction_id"], name: "index_transaction_details_on_transaction_id"
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "customer_name", null: false
+    t.string "customer_email", null: false
+    t.bigint "event_id"
+    t.decimal "total_price", precision: 19, scale: 4, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_transactions_on_event_id"
+  end
+
   add_foreign_key "events", "locations"
   add_foreign_key "events", "schedules"
   add_foreign_key "ticket_types", "events"
+  add_foreign_key "transaction_details", "ticket_types"
+  add_foreign_key "transaction_details", "transactions"
+  add_foreign_key "transactions", "events"
 end
