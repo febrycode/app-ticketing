@@ -29,3 +29,6 @@ app-ticketing $
 ```
 app-ticketing $ rails s
 ```
+3. To run spec test by doing
+```
+app-ticketing $ bundle exec rspec spec/
